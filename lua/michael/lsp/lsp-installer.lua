@@ -1,13 +1,32 @@
 local status_ok, lsp_installer = pcall(require,"nvim-lsp-installer")
-if not status_ok then 
+if not status_ok then
 	return
 end
 
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
-		capabilities = require("user.lsp.handlers").capabilities,
-	}
+lsp_installer.setup {
+	automatic_installation = true
+}
 
-	server:setup(opts)
-end)
+lspconfig = require("lspconfig")
+
+lspconfig.pyright.setup {
+	on_attach = require("michael.lsp.handlers").on_attach,
+	capabilities = require("michael.lsp.handlers").capabilities,
+}
+
+lspconfig.sumneko_lua.setup{
+	on_attach = require("michael.lsp.handlers").on_attach,
+	capabilities = require("michael.lsp.handlers").capabilities,
+}
+
+lspconfig.gopls.setup{
+	on_attach = require("michael.lsp.handlers").on_attach,
+	capabilities = require("michael.lsp.handlers").capabilities,
+}
+
+lspconfig.rust_analyzer.setup{
+	on_attach = require("michael.lsp.handlers").on_attach,
+	capabilities = require("michael.lsp.handlers").capabilities,
+}
+
+

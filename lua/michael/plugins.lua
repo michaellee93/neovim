@@ -41,7 +41,6 @@ packer.init {
 }
 
 
-
 -- INSTALL PLUGINS HERE
 return packer.startup(function(use)
 	-- My plugins here
@@ -49,6 +48,11 @@ return packer.startup(function(use)
 	use "nvim-lua/popup.nvim" -- needed for other plugs
 	use "nvim-lua/plenary.nvim" -- needed for other plugs
 
+	-- Colorschemes
+	--use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+	use "lunarvim/darkplus.nvim"
+	use "EdenEast/nightfox.nvim"
+	use 'Mofiqul/vscode.nvim'
 
 	-- autocompletion plugins
 	use "hrsh7th/nvim-cmp" -- completion plugin
@@ -63,8 +67,18 @@ return packer.startup(function(use)
 	use "rafamadriz/friendly-snippets" -- a bunch of snippets
 
 	-- LSP
+	use 'VonHeikemen/lsp-zero.nvim'
 	use "neovim/nvim-lspconfig" -- enable LSP
 	use "williamboman/nvim-lsp-installer" -- lang server installer
+
+	-- nvim tree
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = {
+			'kyazdani42/nvim-web-devicons',
+		}
+	}
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
