@@ -79,8 +79,18 @@ return packer.startup(function(use)
 		}
 	}
 
+	-- toggleterm
+	use "akinsho/toggleterm.nvim"
+
 	-- git signs
 	use "lewis6991/gitsigns.nvim"
+
+	-- bufferline
+	use "akinsho/bufferline.nvim"
+	use "moll/vim-bbye"
+
+	-- autopairs
+	use "windwp/nvim-autopairs"
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

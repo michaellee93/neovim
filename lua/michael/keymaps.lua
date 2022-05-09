@@ -18,11 +18,6 @@ keymap("i", "jk", "<ESC>", opts)
 
 
 -- move text up and down
--- keymap("v", "<A-j>", ":m .+1<CR>==", opts)
--- keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-
-
--- move text up and down
 keymap("x", "J", ":move '>+<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
@@ -32,3 +27,8 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w-h>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w-h>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w-h>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w-h>l", term_opts)
+
+
+--BufferLine
+keymap("n", "H", ":BufferLineCyclePrev<CR>", opts)
+keymap("n", "L", ":BufferLineCycleNext<CR>", opts)
