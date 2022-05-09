@@ -7,26 +7,21 @@ lsp_installer.setup {
 	automatic_installation = true
 }
 
-lspconfig = require("lspconfig")
-
-lspconfig.pyright.setup {
+local opts = {
 	on_attach = require("michael.lsp.handlers").on_attach,
 	capabilities = require("michael.lsp.handlers").capabilities,
 }
 
-lspconfig.sumneko_lua.setup{
-	on_attach = require("michael.lsp.handlers").on_attach,
-	capabilities = require("michael.lsp.handlers").capabilities,
-}
+local lspconfig = require("lspconfig")
 
-lspconfig.gopls.setup{
-	on_attach = require("michael.lsp.handlers").on_attach,
-	capabilities = require("michael.lsp.handlers").capabilities,
-}
+lspconfig.pyright.setup(opts)
 
-lspconfig.rust_analyzer.setup{
-	on_attach = require("michael.lsp.handlers").on_attach,
-	capabilities = require("michael.lsp.handlers").capabilities,
-}
+local sumneko = require("michael.lsp.settings.sumneko_lua")
+local sumneko_opts = vim.tbl_deep_extend("force", sumneko, opts)
+lspconfig.sumneko_lua.setup(sumneko_opts)
+
+lspconfig.gopls.setup(opts)
+
+lspconfig.rust_analyzer.setup(opts)
 
 

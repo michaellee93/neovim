@@ -5,7 +5,7 @@ local term_opts = { silent = true }
 -- shorten keymap function name
 local keymap = vim.api.nvim_set_keymap
 
--- Normal -- 
+-- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)

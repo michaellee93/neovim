@@ -2,24 +2,24 @@ local M = {}
 
 -- TODO: backfill this to template
 M.setup = function()
---	local signs = {
---    { name = "DiagnosticSignError", text = "" },
---    { name = "DiagnosticSignWarn", text = "" },
---    { name = "DiagnosticSignHint", text = "" },
---    { name = "DiagnosticSignInfo", text = "" },
---  }
+	local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+  }
 
---  for _, sign in ipairs(signs) do
---    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
---  end
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
 
   local config = {
     -- disable virtual text
     virtual_text = false,
-    -- show signs
-    --signs = {
-    --  active = signs,
-    --},
+	  -- show signs
+    signs = {
+      active = signs,
+    },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -60,8 +60,12 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function lsp_keymaps(bufnr)
+local function lsp_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true }
+	-- formatting if has capabilities
+	if client.resolved_capabilities.document_formatting  then
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	end
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "ge", "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', border = 'single' })<CR>", opts)
@@ -89,7 +93,8 @@ M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
   end
-  lsp_keymaps(bufnr)
+
+  lsp_keymaps(client,bufnr)
   lsp_highlight_document(client)
 end
 
