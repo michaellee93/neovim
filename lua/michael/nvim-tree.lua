@@ -111,7 +111,7 @@ nvim_tree.setup {
 }
 
 -- set mapping for toggle
-vim.api.nvim_set_keymap("n", "ft", ":NvimTreeToggle<CR>", {
+vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", {
 	noremap = true,
 	silent = true
 })

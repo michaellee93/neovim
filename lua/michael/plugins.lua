@@ -71,6 +71,13 @@ return packer.startup(function(use)
 	use "neovim/nvim-lspconfig" -- enable LSP
 	use "williamboman/nvim-lsp-installer" -- lang server installer
 
+	-- Treesitter
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
+	}
+
+
 	-- nvim tree
 	use {
 		'kyazdani42/nvim-tree.lua',
@@ -78,6 +85,9 @@ return packer.startup(function(use)
 			'kyazdani42/nvim-web-devicons',
 		}
 	}
+	-- telescope
+	use "nvim-telescope/telescope.nvim"
+use 'nvim-telescope/telescope-media-files.nvim'
 
 	-- toggleterm
 	use "akinsho/toggleterm.nvim"
